@@ -149,7 +149,7 @@ namespace VavilichevGD.Utils.Editor.Builder {
 
         private static void UpdateVersion() {
             var version = GetCurrentVersion();
-            var newVersion = Math.Round(version + 0.01f, 2);
+            var newVersion = System.Math.Round(version + 0.01f, 2);
             SetNewVersion(newVersion);
         }
 
