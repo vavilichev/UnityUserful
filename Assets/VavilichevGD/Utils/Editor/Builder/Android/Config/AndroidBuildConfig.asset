@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3de78c96248435c920412b14cd812f7, type: 3}
+  m_Name: AndroidBuildConfig
+  m_EditorClassIdentifier: 
+  m_keyStorePassword: KeyStorePassword
+  m_keyAliasPassword: KeyAliasPassword
+  m_scenes:
+  - {fileID: 102900000, guid: cb3a928bebbe34c40b4f860db8842765, type: 3}
+  - {fileID: 102900000, guid: 8b321dd9fbcce2d438c1df837739e51f, type: 3}
