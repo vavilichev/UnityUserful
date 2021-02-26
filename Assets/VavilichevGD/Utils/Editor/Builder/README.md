@@ -8,7 +8,7 @@ This asset created by VavilichevGD for improving developing experience. You know
 
 ## How to use
 
-### Now asset available only for Android platform
+**(Now asset available only for Android platform)**
 
 <br>
 
@@ -29,3 +29,8 @@ This asset created by VavilichevGD for improving developing experience. You know
 
 #### 4. Enter your passwords of keystore and key alias. And add scenes to the list.<br>
 ![](https://github.com/vavilichev/UnityUserful/blob/main/Assets/VavilichevGD/Utils/Editor/Builder/ScreenSetupSettings.png)
+
+<br>
+
+#### 5. Enjoy<br>
+Now you can build project by two clicks!
