@@ -29,8 +29,9 @@ namespace VavilichevGD.Utils.Editor.Builder {
 		
 		private void OnValidate() {
 			foreach (var scene in this.m_scenes) {
-				if (!(scene is SceneAsset)) {
+				if (scene != null && !(scene is SceneAsset)) {
 					this.m_scenes.Remove(scene);
+					Debug.Log($"You cannot add {scene.GetType().Name}, because it is not a scene.");
 					break;
 				}
 			}

@@ -14,6 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_keyStorePassword: KeyStorePassword
   m_keyAliasPassword: KeyAliasPassword
-  m_scenes:
-  - {fileID: 102900000, guid: cb3a928bebbe34c40b4f860db8842765, type: 3}
-  - {fileID: 102900000, guid: 8b321dd9fbcce2d438c1df837739e51f, type: 3}
+  m_scenes: []

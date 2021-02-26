@@ -15,7 +15,7 @@ namespace VavilichevGD.Utils.Editor.Builder {
         
         #region Const
 
-        private const string CONFIG_PATH = "Assets/VavilichevGD/Utils/Editor/Builder/Config/AndroidBuildConfig.asset";
+        private const string CONFIG_PATH = "Assets/VavilichevGD/Utils/Editor/Builder/Android/Config/AndroidBuildConfig.asset";
         private const string NAMESPACE_RESOLVER = "GooglePlayServices";
         private const string SYMBOL_RESOLVER_EXISTS = "RESOLVER_EXISTS";
         private const BuildOptions OPTIONS_DEVELOPMENT = BuildOptions.Development | BuildOptions.AutoRunPlayer;
