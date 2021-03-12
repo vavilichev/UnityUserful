@@ -3,6 +3,9 @@
 
 [Load DialogueSystem.unitypackage](https://github.com/vavilichev/UnityUserful/blob/main/Assets/VavilichevGD/Gameplay/Dialogues/DialogueSystem.unitypackage)
 
+<img src="https://github.com/vavilichev/UnityUserful/blob/main/Assets/VavilichevGD/Gameplay/Dialogues/DialogueGraph_3.png" data-canonical-src="https://gyazo.com/eb5c5741b6a9a16c692170a41a49c858.png" width="650" height="367" />
+
+<br><br>
 Simple system that allows you to write your game dialogues with convenient graph tool!
 <br><br>
 ![](https://github.com/vavilichev/UnityUserful/blob/main/Assets/VavilichevGD/Gameplay/Dialogues/DialogueGraph_1.png?raw=true)
