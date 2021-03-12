@@ -4,6 +4,7 @@
     <e p="C:\Users\Вилла у моря\AppData\Local\JetBrains\Rider2020.1\extResources" t="IncludeRecursive" />
     <e p="C:\Users\Вилла у моря\AppData\Local\JetBrains\Rider2020.1\resharper-host\Local\Transient\ReSharperHost\v201\SolutionCaches\_UnityUseful.158965665.00" t="ExcludeRecursive" />
     <e p="D:\UnityProjects\UnityUseful" t="IncludeRecursive">
+      <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="VavilichevGD" t="Include">
@@ -29,6 +30,15 @@
             </e>
           </e>
           <e p="Utils" t="Include">
+            <e p="Editor" t="Include">
+              <e p="Builder" t="Include">
+                <e p="Android" t="Include">
+                  <e p="AndroidBuildConfig.cs" t="Include" />
+                  <e p="AndroidBuildHelper.cs" t="Include" />
+                </e>
+              </e>
+              <e p="EditorHelper.cs" t="Include" />
+            </e>
             <e p="Math" t="Include">
               <e p="Math.cs" t="Include" />
             </e>

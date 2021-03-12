@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0541891c97c7574a8c6d4649bb4c0cb, type: 3}
+  m_Name: ExampleDialogueGraph
+  m_EditorClassIdentifier: 
+  nodeLinks:
+  - baseNodeGUID: a7cc683c-1f68-4bb4-b4ab-2177c2fa0dc1
+    portName: Begin
+    targetNodeGUID: 20ffadf7-155d-4875-b4e1-d4f20c5ae535
+  - baseNodeGUID: 52f426be-62bb-4528-a0df-2480a8e80e80
+    portName: Great! I'll subscribe!
+    targetNodeGUID: 31fd6ae0-2298-4076-85a7-7231917b2f24
+  - baseNodeGUID: ac8dd6cd-dfe0-4280-9212-e9d523a65509
+    portName: Tell me about about your creator.
+    targetNodeGUID: 52f426be-62bb-4528-a0df-2480a8e80e80
+  - baseNodeGUID: 20ffadf7-155d-4875-b4e1-d4f20c5ae535
+    portName: Cool! Show me what you can
+    targetNodeGUID: ac8dd6cd-dfe0-4280-9212-e9d523a65509
+  - baseNodeGUID: 20ffadf7-155d-4875-b4e1-d4f20c5ae535
+    portName: Okay. Understood.
+    targetNodeGUID: 82f929ea-3890-4844-8477-109ff132499d
+  - baseNodeGUID: ac8dd6cd-dfe0-4280-9212-e9d523a65509
+    portName: I dont want listen to you!
+    targetNodeGUID: 1952ff5b-3c57-4f2d-bd94-c863047f9c66
+  - baseNodeGUID: 1952ff5b-3c57-4f2d-bd94-c863047f9c66
+    portName: Okay. I'll do it.
+    targetNodeGUID: 31fd6ae0-2298-4076-85a7-7231917b2f24
+  dialogueNodeData:
+  - guid: ac8dd6cd-dfe0-4280-9212-e9d523a65509
+    author: Richard
+    dialogueText: I can give you different answers, depend on your choice!
+    position: {x: 719, y: -14}
+  - guid: 20ffadf7-155d-4875-b4e1-d4f20c5ae535
+    author: Richard
+    dialogueText: Hi there! I am a super duper coolest asset "Dialogues"!
+    position: {x: 195, y: 172}
+  - guid: 52f426be-62bb-4528-a0df-2480a8e80e80
+    author: Richard
+    dialogueText: 'You can find my creator on twitter: @vavilichevgd'
+    position: {x: 1330, y: -58}
+  - guid: 31fd6ae0-2298-4076-85a7-7231917b2f24
+    author: Richard
+    dialogueText: Thanks! Bye.
+    position: {x: 1897, y: 61}
+  - guid: 82f929ea-3890-4844-8477-109ff132499d
+    author: Richard
+    dialogueText: Okay, Bye.
+    position: {x: 940, y: 221}
+  - guid: 1952ff5b-3c57-4f2d-bd94-c863047f9c66
+    author: Richard
+    dialogueText: Okay. But you have to subscribe @vavilichevgd on twitter!
+    position: {x: 1306, y: 107}
