@@ -5,6 +5,11 @@
 
 <img src="https://github.com/vavilichev/UnityUserful/blob/main/Assets/VavilichevGD/Gameplay/Dialogues/DialogueGraph_3.png" data-canonical-src="https://gyazo.com/eb5c5741b6a9a16c692170a41a49c858.png" width="650" height="367" />
 
+<br>
+
+To create new Dialogue - just go to **Window/Dialogues/Dialogue Graph**
+<img src="https://github.com/vavilichev/UnityUserful/blob/main/Assets/VavilichevGD/Gameplay/Dialogues/DialogueGraph_4.png" data-canonical-src="https://gyazo.com/eb5c5741b6a9a16c692170a41a49c858.png" width="457" height="159" />
+
 <br><br>
 Simple system that allows you to write your game dialogues with convenient graph tool!
 <br><br>
