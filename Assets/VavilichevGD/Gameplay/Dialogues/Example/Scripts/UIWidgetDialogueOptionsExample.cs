@@ -62,12 +62,16 @@ namespace VavilichevGD.Gameplay.Dialogues.Example {
 		}
 
 		private void OnCancelButtonClicked() {
+#if UNITY_EDITOR
 			EditorApplication.isPlaying = false;
+#endif
 		}
 
 		private void OnSubscribeOnTwitterButtonClicked() {
 			Application.OpenURL("https://twitter.com/vavilichevgd");
+#if UNITY_EDITOR
 			EditorApplication.isPlaying = false;
+#endif
 		}
 
 		#endregion

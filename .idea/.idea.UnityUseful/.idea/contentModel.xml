@@ -29,6 +29,43 @@
               </e>
             </e>
           </e>
+          <e p="Gameplay" t="Include">
+            <e p="Dialogues" t="Include">
+              <e p="DialogueGraph" t="Include">
+                <e p="Resources" t="Include">
+                  <e p="DialogueGraph.uss" t="Include" />
+                  <e p="Node.uss" t="Include" />
+                </e>
+                <e p="Scripts" t="Include">
+                  <e p="DialogueInfo.cs" t="Include" />
+                  <e p="DialogueNodeData.cs" t="Include" />
+                  <e p="Editor" t="Include">
+                    <e p="DialogueGraph.cs" t="Include" />
+                    <e p="DialogueGraphView.cs" t="Include" />
+                    <e p="DialogueInfoEditor.cs" t="Include" />
+                    <e p="EditorDialogueNode.cs" t="Include" />
+                    <e p="GraphSaveUtility.cs" t="Include" />
+                    <e p="NodeSearchWindow.cs" t="Include" />
+                  </e>
+                  <e p="NodeLinkData.cs" t="Include" />
+                </e>
+              </e>
+              <e p="Example" t="Include">
+                <e p="Scripts" t="Include">
+                  <e p="DialogueExample.cs" t="Include" />
+                  <e p="UIWidgetDialogueOptionExample.cs" t="Include" />
+                  <e p="UIWidgetDialogueOptionsExample.cs" t="Include" />
+                </e>
+              </e>
+              <e p="Scripts" t="Include">
+                <e p="Dialogue.cs" t="Include" />
+                <e p="DialogueNode.cs" t="Include" />
+                <e p="DialogueOption.cs" t="Include" />
+                <e p="DialogueState.cs" t="Include" />
+                <e p="DialogueTree.cs" t="Include" />
+              </e>
+            </e>
+          </e>
           <e p="Utils" t="Include">
             <e p="Editor" t="Include">
               <e p="Builder" t="Include">
