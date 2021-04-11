@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.IO;
 using System.Threading;
 using UnityEngine;
+using VavilichevGD.Tools;
 
 namespace VavilichevGD.Architecture.StorageSystem {
 	public sealed class LocalStorageBehavior : IStorageBehavior {
@@ -37,6 +39,23 @@ namespace VavilichevGD.Architecture.StorageSystem {
 			thread.Start();
 		}
 
+		public Coroutine SaveWithRoutine(object saveData, Action callback = null) {
+			return Coroutines.StartRoutine(this.SaveRoutine(saveData, callback));
+		}
+
+		private IEnumerator SaveRoutine(object saveData, Action callback) {
+			var threadEnded = false;
+			
+			this.SaveAsync(saveData, () => {
+				threadEnded = true;
+			});
+			
+			while (!threadEnded)
+				yield return null;
+			
+			callback?.Invoke();
+		}
+
 		private void SaveDataTaskThreaded(object saveData, Action callback) {
 			this.Save(saveData);
 			callback?.Invoke();
@@ -61,12 +80,31 @@ namespace VavilichevGD.Architecture.StorageSystem {
 			return saveData;
 		}
 		
-		public void LoadAsync(Action<object> callback, object saveDataByDefault) {
-			var thread = new Thread(() => LoadDataTaskThreaded(callback, saveDataByDefault));
+		public void LoadAsync(object saveDataByDefault, Action<object> callback) {
+			var thread = new Thread(() => LoadDataTaskThreaded(saveDataByDefault, callback));
 			thread.Start();
 		}
 
-		private void LoadDataTaskThreaded(Action<object> callback, object saveDataByDefault) {
+		public Coroutine LoadWithRoutine(object saveDataByDefault, Action<object> callback = null) {
+			return Coroutines.StartRoutine(this.LoadRoutine(saveDataByDefault, callback));
+		}
+
+		private IEnumerator LoadRoutine(object saveDataByDefault, Action<object> callback) {
+			var threadEnded = false;
+			object saveData = null;
+			
+			this.LoadAsync(saveDataByDefault, (loadedData) => {
+				threadEnded = true;
+				saveData = loadedData;
+			});
+			
+			while (!threadEnded)
+				yield return null;
+			
+			callback?.Invoke(saveData);
+		}
+
+		private void LoadDataTaskThreaded(object saveDataByDefault, Action<object> callback) {
 			var saveData = this.Load(saveDataByDefault);
 			callback?.Invoke(saveData);
 		}

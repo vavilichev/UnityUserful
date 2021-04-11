@@ -1,11 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="d6bda5ec-3c6e-4c7d-9da8-63392464d685" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.UnityUseful/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.UnityUseful/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.UnityUseful/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.UnityUseful/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.UnityUseful/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.UnityUseful/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VavilichevGD/Utils/Editor/Builder/Android/Config/AndroidBuildConfig.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VavilichevGD/Utils/Editor/Builder/Android/Config/AndroidBuildConfig.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VavilichevGD/Architecture/Storage/Example/Scenes/StorageExample.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VavilichevGD/Architecture/Storage/Example/Scenes/StorageExample.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VavilichevGD/Architecture/Storage/Example/Scripts/StorageExample.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VavilichevGD/Architecture/Storage/Example/Scripts/StorageExample.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VavilichevGD/Architecture/Storage/Scripts/Behavior/IStorageBehavior.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VavilichevGD/Architecture/Storage/Scripts/Behavior/IStorageBehavior.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VavilichevGD/Architecture/Storage/Scripts/Behavior/LocalStorageBehavior.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VavilichevGD/Architecture/Storage/Scripts/Behavior/LocalStorageBehavior.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VavilichevGD/Architecture/Storage/Scripts/GameData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VavilichevGD/Architecture/Storage/Scripts/GameData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VavilichevGD/Architecture/Storage/Scripts/Storage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VavilichevGD/Architecture/Storage/Scripts/Storage.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,14 +39,40 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/VavilichevGD/FX/UI/Scripts/FXUIGenerator.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/VavilichevGD/Utils/Editor/EditorHelper.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/VavilichevGD/Architecture/Storage/Scripts/Behavior/LocalStorageBehavior.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/VavilichevGD/Tools/Coroutines/Scripts/Coroutines.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/VavilichevGD/Architecture/Storage/Example/Scripts/StorageExample.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/VavilichevGD/Utils/Editor/Builder/Android/Config/AndroidBuildConfig.asset" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/VavilichevGD/Architecture/Storage/Scripts/Behavior/IStorageBehavior.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/VavilichevGD/Gameplay/Dialogues/Example/Scripts/DialogueExample.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/VavilichevGD/Architecture/Storage/Scripts/GameData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/VavilichevGD/Utils/Editor/Builder/Android/AndroidBuildConfig.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/VavilichevGD/Gameplay/Dialogues/Example/Scripts/UIWidgetDialogueOptionExample.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/VavilichevGD/Gameplay/Dialogues/Example/Scripts/UIWidgetDialogueOptionsExample.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/VavilichevGD/Architecture/Storage/Scripts/Storage.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/VavilichevGD/Utils/Editor/EditorHelper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/VavilichevGD/Utils/PoolMono.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/VavilichevGD/Utils/Editor/Builder/Android/AndroidBuildHelper.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/VavilichevGD/Utils/Editor/Builder/Android/AndroidBuildConfig.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/Assets/VavilichevGD/Gameplay/Dialogues/Example/Scripts/UIWidgetDialogueOptionsExample.cs" />
+        <option value="$PROJECT_DIR$/Assets/VavilichevGD/Architecture/Storage/Scripts/GameData.cs" />
+        <option value="$PROJECT_DIR$/Assets/VavilichevGD/Utils/Coroutines/Scripts/CoroutineHelper.cs" />
+        <option value="$PROJECT_DIR$/Assets/VavilichevGD/Utils/Coroutines/Scripts/CoroutineDispatcher.cs" />
+        <option value="$PROJECT_DIR$/Assets/VavilichevGD/Utils/Coroutines/Scripts/Routine.cs" />
+        <option value="$PROJECT_DIR$/Assets/VavilichevGD/Architecture/Storage/Scripts/Behavior/IStorageBehavior.cs" />
+        <option value="$PROJECT_DIR$/Assets/VavilichevGD/Architecture/Storage/Scripts/Behavior/LocalStorageBehavior.cs" />
+        <option value="$PROJECT_DIR$/Assets/VavilichevGD/Architecture/Storage/Scripts/Storage.cs" />
+        <option value="$PROJECT_DIR$/Assets/VavilichevGD/Architecture/Storage/Example/Scripts/StorageExample.cs" />
+      </list>
+    </option>
   </component>
   <component name="ProjectId" id="1otGQPGcQfm0Vv5aveG4mcZwgSK" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="autoscrollFromSource" value="true" />
     <option name="autoscrollToSource" value="true" />
@@ -55,7 +104,28 @@
   </component>
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="682" y="221" key="RiderGenerateDialog" timestamp="1618153959242">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="682" y="221" key="RiderGenerateDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1618153959242" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1617979348103">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1617979348103" />
   </component>
 </project>

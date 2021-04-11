@@ -7,7 +7,9 @@ namespace VavilichevGD.Architecture.StorageSystem {
 	public sealed class GameData {
 		
 		// ======== EXAMPLE REPLACE YOUR OWN DATA PLEASE
-		
+
+		public int version;
+		public int speed;
 		public int valueInt;
 		public float valueFloat;
 		public Vector3 valueVector3;

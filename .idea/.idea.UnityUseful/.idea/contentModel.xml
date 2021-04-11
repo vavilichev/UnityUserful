@@ -8,24 +8,25 @@
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="VavilichevGD" t="Include">
-          <e p="FX" t="Include">
-            <e p="Scripts" t="Include">
-              <e p="FXGenerator.cs" t="Include" />
-              <e p="FXObject.cs" t="Include" />
-            </e>
-            <e p="UI" t="Include">
-              <e p="Examples" t="Include">
+          <e p="Architecture" t="Include">
+            <e p="Storage" t="Include">
+              <e p="Example" t="Include">
                 <e p="Scripts" t="Include">
-                  <e p="ExampleFXUIGenerator.cs" t="Include" />
+                  <e p="StorageExample.cs" t="Include" />
                 </e>
               </e>
               <e p="Scripts" t="Include">
-                <e p="FXUIAnimation.cs" t="Include" />
-                <e p="FXUIAnimationDistance.cs" t="Include" />
-                <e p="FXUIAnimationDistanceAndOffset.cs" t="Include" />
-                <e p="FXUIAnimationOffset.cs" t="Include" />
-                <e p="FXUIGenerator.cs" t="Include" />
-                <e p="FXUIObject.cs" t="Include" />
+                <e p="Behavior" t="Include">
+                  <e p="IStorageBehavior.cs" t="Include" />
+                  <e p="LocalStorageBehavior.cs" t="Include" />
+                </e>
+                <e p="GameData.cs" t="Include" />
+                <e p="Storage.cs" t="Include" />
+                <e p="Surrogates" t="Include">
+                  <e p="QuaternionSerializationSurrogate.cs" t="Include" />
+                  <e p="Vector2SerializationSurrogate.cs" t="Include" />
+                  <e p="Vector3SerializationSurrogate.cs" t="Include" />
+                </e>
               </e>
             </e>
           </e>
@@ -63,6 +64,37 @@
                 <e p="DialogueOption.cs" t="Include" />
                 <e p="DialogueState.cs" t="Include" />
                 <e p="DialogueTree.cs" t="Include" />
+              </e>
+            </e>
+            <e p="FX" t="Include">
+              <e p="Scripts" t="Include">
+                <e p="FXGenerator.cs" t="Include" />
+                <e p="FXObject.cs" t="Include" />
+              </e>
+              <e p="UI" t="Include">
+                <e p="Examples" t="Include">
+                  <e p="Scripts" t="Include">
+                    <e p="ExampleFXUIGenerator.cs" t="Include" />
+                  </e>
+                </e>
+                <e p="Scripts" t="Include">
+                  <e p="FXUIAnimation.cs" t="Include" />
+                  <e p="FXUIAnimationDistance.cs" t="Include" />
+                  <e p="FXUIAnimationDistanceAndOffset.cs" t="Include" />
+                  <e p="FXUIAnimationOffset.cs" t="Include" />
+                  <e p="FXUIGenerator.cs" t="Include" />
+                  <e p="FXUIObject.cs" t="Include" />
+                </e>
+              </e>
+            </e>
+          </e>
+          <e p="Tools" t="Include">
+            <e p="Coroutines" t="Include">
+              <e p="Scripts" t="Include">
+                <e p="Coroutines.cs" t="Include" />
+                <e p="Routine.cs" t="Include" />
+                <e p="RoutineBase.cs" t="Include" />
+                <e p="RoutineWithArg.cs" t="Include" />
               </e>
             </e>
           </e>

@@ -1,12 +1,14 @@
-﻿using UnityEngine;
+﻿using System.Data.Common;
+using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 namespace VavilichevGD.Architecture.StorageSystem.Example {
 	public class StorageExample : MonoBehaviour {
 
-		[SerializeField] private Button buttonSave;
-		[SerializeField] private Button buttonLoad;
+		[SerializeField] private Button buttonSaveAsync;
+		[SerializeField] private Button buttonLoadInstantly;
+		[SerializeField] private Button buttonLoadWithRoutine;
 		[SerializeField] private Text textLog;
 
 		private bool savingComplete;
@@ -20,19 +22,29 @@ namespace VavilichevGD.Architecture.StorageSystem.Example {
 			var data = Storage.instance.data;
 			this.Log($"GameData loaded at start:\n" +
 			         $"int = {data.valueInt},\n" +
+			         $"speed = {data.speed},\n" +
 			         $"float = {data.valueFloat},\n" +
 			         $"vector3 = {data.valueVector3},\n" +
-			         $"vector2 = {data.valueVector2}", false);
+			         $"vector2 = {data.valueVector2},\n" +
+			         $"version = {data.version}", false);
+
+			if (data.version < 2) {
+				data.version = 2;
+				data.speed = 100;
+				Debug.Log("New version. Speed changed tp 100");
+			}
 		}
 
 		private void OnEnable() {
-			this.buttonSave.onClick.AddListener(this.OnSaveButtonClick);
-			this.buttonLoad.onClick.AddListener(this.OnLoadButtonClick);
+			this.buttonSaveAsync.onClick.AddListener(this.OnSaveAsyncButtonClick);
+			this.buttonLoadInstantly.onClick.AddListener(this.OnLoadInstantlyButtonClick);
+			this.buttonLoadWithRoutine.onClick.AddListener(this.OnLoadWithRoutineButtonClick);
 		}
 
 		private void OnDisable() {
-			this.buttonSave.onClick.RemoveListener(this.OnSaveButtonClick);
-			this.buttonLoad.onClick.RemoveListener(this.OnLoadButtonClick);
+			this.buttonSaveAsync.onClick.RemoveListener(this.OnSaveAsyncButtonClick);
+			this.buttonLoadInstantly.onClick.RemoveListener(this.OnLoadInstantlyButtonClick);
+			this.buttonLoadWithRoutine.onClick.RemoveListener(this.OnLoadWithRoutineButtonClick);
 		}
 
 		#endregion
@@ -43,11 +55,14 @@ namespace VavilichevGD.Architecture.StorageSystem.Example {
 			
 			if (this.savingComplete) {
 				var data = Storage.instance.data;
-				this.Log($"GameData saved:\n" +
+				this.Log($"GameData saved asynchronous:\n" +
 				         $"int = {data.valueInt},\n" +
+				         $"speed = {data.speed},\n" +
 				         $"float = {data.valueFloat},\n" +
 				         $"vector3 = {data.valueVector3},\n" +
-				         $"vector2 = {data.valueVector2}", true);
+				         $"vector2 = {data.valueVector2},\n" + 
+						 $"version = {data.version}", true);
+
 				this.Log($"Saving complete at: {Time.time}", true);
 				this.savingComplete = false;
 			}
@@ -56,7 +71,7 @@ namespace VavilichevGD.Architecture.StorageSystem.Example {
 
 		#region CALLBACKS
 
-		private void OnSaveButtonClick() {
+		private void OnSaveAsyncButtonClick() {
 			this.Log($"Saving started: {Time.time}", false);
 				
 			var data = Storage.instance.data;
@@ -64,6 +79,7 @@ namespace VavilichevGD.Architecture.StorageSystem.Example {
 			data.valueFloat = Random.Range(0f, 10f);
 			data.valueVector3 = Vector3.left;;
 			data.valueVector2 = Vector2.up;
+			data.version = 2;
 				
 			Storage.instance.SaveAsync(() => {
 				// We cannot get Time.time because Unity doesnot support to do this in the side thread. That
@@ -72,14 +88,29 @@ namespace VavilichevGD.Architecture.StorageSystem.Example {
 			});
 		}
 
-		private void OnLoadButtonClick() {
+		private void OnLoadInstantlyButtonClick() {
 			Storage.instance.Load();
 			var data = Storage.instance.data;
-			this.Log($"GameData loaded:\n" +
+			this.Log($"GameData loaded instantly:\n" +
 			         $"int = {data.valueInt},\n" +
+			         $"speed = {data.speed},\n" +
 			         $"float = {data.valueFloat},\n" +
 			         $"vector3 = {data.valueVector3},\n" +
-			         $"vector2 = {data.valueVector2}", false);
+			         $"vector2 = {data.valueVector2},\n" + 
+					 $"version = {data.version}", false);
+		}
+		
+		private void OnLoadWithRoutineButtonClick() {
+			Storage.instance.LoadWithRoutine(loadedData => {
+				var data = loadedData;
+				this.Log($"GameData loaded with routine:\n" +
+				         $"int = {data.valueInt},\n" +
+				         $"speed = {data.speed},\n" +
+				         $"float = {data.valueFloat},\n" +
+				         $"vector3 = {data.valueVector3},\n" +
+				         $"vector2 = {data.valueVector2},\n" +
+				         $"version = {data.version}", false);
+			});
 		}
 
 		#endregion

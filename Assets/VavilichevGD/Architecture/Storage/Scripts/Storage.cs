@@ -38,7 +38,8 @@ namespace VavilichevGD.Architecture.StorageSystem {
 		public static bool isInitialized => instance.data != null;
 
 		#endregion
-		
+
+
 		
 		public GameData data { get; private set; }
 		
@@ -71,7 +72,7 @@ namespace VavilichevGD.Architecture.StorageSystem {
 		
 		public void Save() {
 			this.OnStorageSaveStartedEvent?.Invoke();
-			this.storageBehavior.Save(data);
+			this.storageBehavior.Save(this.data);
 			this.OnStorageSaveCompleteEvent?.Invoke();
 		}
 
@@ -80,6 +81,14 @@ namespace VavilichevGD.Architecture.StorageSystem {
 			this.storageBehavior.SaveAsync(this.data, callback);
 			this.OnStorageSaveCompleteEvent?.Invoke();
 		}
+
+		public Coroutine SaveWithRoutine(Action callback = null) {
+			this.OnStorageSaveStartedEvent?.Invoke();
+			return this.storageBehavior.SaveWithRoutine(this.data, () => {
+				callback?.Invoke();
+				this.OnStorageSaveStartedEvent?.Invoke();
+			});
+		}
 		
 		public void Load() {
 			this.data = (GameData) storageBehavior.Load(new GameData());
@@ -87,12 +96,21 @@ namespace VavilichevGD.Architecture.StorageSystem {
 		}
 
 		public void LoadAsync(Action<GameData> callback) {
-			this.storageBehavior.LoadAsync(gameData => {
+			this.storageBehavior.LoadAsync(new GameData(), gameData => {
 					this.data = (GameData) gameData;
 					callback?.Invoke(this.data);
 					this.OnStorageLoadedEvent?.Invoke(this.data);
-				},
-				new GameData());
+				}
+			);
 		}
+
+		public Coroutine LoadWithRoutine(Action<GameData> callback = null) {
+			return this.storageBehavior.LoadWithRoutine(new GameData(), loadedData => {
+				this.data = (GameData) loadedData;
+				callback?.Invoke(this.data);
+				this.OnStorageLoadedEvent?.Invoke(this.data);
+			});
+		}
+		
 	}
 }
