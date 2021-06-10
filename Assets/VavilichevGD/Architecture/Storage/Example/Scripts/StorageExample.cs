@@ -1,11 +1,21 @@
-﻿using System.Data.Common;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 namespace VavilichevGD.Architecture.StorageSystem.Example {
 	public class StorageExample : MonoBehaviour {
 
+		#region CONSTANTS
+
+		private const string KEY_INT = "INTEGER";
+		private const string KEY_SPEED = "SPEED";
+		private const string KEY_FLOAT = "FLOAT";
+		private const string KEY_VECTOR3 = "VECTOR3";
+		private const string KEY_VECTOR2 = "VECTOR2";
+		private const string KEY_VERSION = "VERSION";
+
+		#endregion
+		
 		[SerializeField] private Button buttonSaveAsync;
 		[SerializeField] private Button buttonLoadInstantly;
 		[SerializeField] private Button buttonLoadWithRoutine;
@@ -18,20 +28,13 @@ namespace VavilichevGD.Architecture.StorageSystem.Example {
 
 		private void Start() {
 			Storage.instance.Load();
-
-			var data = Storage.instance.data;
-			this.Log($"GameData loaded at start:\n" +
-			         $"int = {data.valueInt},\n" +
-			         $"speed = {data.speed},\n" +
-			         $"float = {data.valueFloat},\n" +
-			         $"vector3 = {data.valueVector3},\n" +
-			         $"vector2 = {data.valueVector2},\n" +
-			         $"version = {data.version}", false);
-
-			if (data.version < 2) {
-				data.version = 2;
-				data.speed = 100;
-				Debug.Log("New version. Speed changed tp 100");
+			this.PrintData("loaded instantly at start", false);
+			
+			var loadedVersion = Storage.instance.Get<int>(KEY_VERSION);
+			if (loadedVersion < 2) {
+				Storage.instance.Set(KEY_VERSION, 2);
+				Storage.instance.Set(KEY_SPEED, 100);
+				Debug.Log("New version. Speed changed to 100");
 			}
 		}
 
@@ -52,21 +55,11 @@ namespace VavilichevGD.Architecture.StorageSystem.Example {
 	
 		
 		private void Update() {
-			
 			if (this.savingComplete) {
-				var data = Storage.instance.data;
-				this.Log($"GameData saved asynchronous:\n" +
-				         $"int = {data.valueInt},\n" +
-				         $"speed = {data.speed},\n" +
-				         $"float = {data.valueFloat},\n" +
-				         $"vector3 = {data.valueVector3},\n" +
-				         $"vector2 = {data.valueVector2},\n" + 
-						 $"version = {data.version}", true);
-
+				this.PrintData("saved async", true);
 				this.Log($"Saving complete at: {Time.time}", true);
 				this.savingComplete = false;
 			}
-			
 		}
 
 		#region CALLBACKS
@@ -74,51 +67,58 @@ namespace VavilichevGD.Architecture.StorageSystem.Example {
 		private void OnSaveAsyncButtonClick() {
 			this.Log($"Saving started: {Time.time}", false);
 				
-			var data = Storage.instance.data;
-			data.valueInt = Random.Range(0, 10);
-			data.valueFloat = Random.Range(0f, 10f);
-			data.valueVector3 = Vector3.left;;
-			data.valueVector2 = Vector2.up;
-			data.version = 2;
+			Storage.instance.Set(KEY_INT, Random.Range(0, 10));
+			Storage.instance.Set(KEY_FLOAT, Random.Range(0f, 10f));
+			Storage.instance.Set(KEY_VECTOR3, Vector3.left);
+			Storage.instance.Set(KEY_VECTOR2, Vector2.up);
+			Storage.instance.Set(KEY_VERSION, 2);
 				
 			Storage.instance.SaveAsync(() => {
-				// We cannot get Time.time because Unity doesnot support to do this in the side thread. That
-				// is why we use a simple flag for logging time.
+				// We cannot get Time.time (for logging the end of saving process)
+				// because Unity doesn't support to do this in the side thread. That is why we use a simple flag.
 				this.savingComplete = true;
 			});
 		}
 
 		private void OnLoadInstantlyButtonClick() {
 			Storage.instance.Load();
-			var data = Storage.instance.data;
-			this.Log($"GameData loaded instantly:\n" +
-			         $"int = {data.valueInt},\n" +
-			         $"speed = {data.speed},\n" +
-			         $"float = {data.valueFloat},\n" +
-			         $"vector3 = {data.valueVector3},\n" +
-			         $"vector2 = {data.valueVector2},\n" + 
-					 $"version = {data.version}", false);
+			this.PrintData("loaded instantly", false);
 		}
 		
 		private void OnLoadWithRoutineButtonClick() {
-			Storage.instance.LoadWithRoutine(loadedData => {
-				var data = loadedData;
-				this.Log($"GameData loaded with routine:\n" +
-				         $"int = {data.valueInt},\n" +
-				         $"speed = {data.speed},\n" +
-				         $"float = {data.valueFloat},\n" +
-				         $"vector3 = {data.valueVector3},\n" +
-				         $"vector2 = {data.valueVector2},\n" +
-				         $"version = {data.version}", false);
-			});
+			Storage.instance.LoadWithRoutine(() => this.PrintData("loaded with routine", false));
 		}
 
 		#endregion
 
+
+
+		#region LOGGING
+
+		private void PrintData(string process, bool append) {
+			var loadedInt = Storage.instance.Get<int>(KEY_INT);
+			var loadedSpeed = Storage.instance.Get<int>(KEY_SPEED);
+			var loadedFloat = Storage.instance.Get<float>(KEY_FLOAT);
+			var loadedVector3 = Storage.instance.Get<Vector3>(KEY_VECTOR3);
+			var loadedVector2 = Storage.instance.Get<Vector2>(KEY_VECTOR2);
+			var loadedVersion = Storage.instance.Get<int>(KEY_VERSION);
+			
+			
+			this.Log($"GameData {process}:\n" +
+			         $"int = {loadedInt},\n" +
+			         $"speed = {loadedSpeed},\n" +
+			         $"float = {loadedFloat},\n" +
+			         $"vector3 = {loadedVector3},\n" +
+			         $"vector2 = {loadedVector2},\n" +
+			         $"version = {loadedVersion}", append);
+		}
+		
 		private void Log(string text, bool append) {
 			var logText = append ? this.textLog.text + "\n" + text : text;
 			this.textLog.text = logText;
 		}
+
+		#endregion
 		
 	}
 }

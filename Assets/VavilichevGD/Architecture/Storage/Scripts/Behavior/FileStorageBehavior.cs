@@ -6,7 +6,7 @@ using UnityEngine;
 using VavilichevGD.Tools;
 
 namespace VavilichevGD.Architecture.StorageSystem {
-	public sealed class LocalStorageBehavior : IStorageBehavior {
+	public sealed class FileStorageBehavior : IStorageBehavior {
 
 		#region CONSTANTS
 
@@ -17,15 +17,13 @@ namespace VavilichevGD.Architecture.StorageSystem {
 
 		private string filePath { get; }
 
-		public LocalStorageBehavior() {
+		public FileStorageBehavior() {
 			if (!Directory.Exists(savesDirectory)) 
 				Directory.CreateDirectory(savesDirectory);
 			this.filePath =  $"{savesDirectory}/{SAVE_FILE_NAME}";
+			Debug.Log($"FilePath: {filePath}");
 		}
 
-
-		
-		
 		#region SAVE
 
 		public void Save(object saveData) {
@@ -38,7 +36,7 @@ namespace VavilichevGD.Architecture.StorageSystem {
 			var thread = new Thread(() => this.SaveDataTaskThreaded(saveData, callback));
 			thread.Start();
 		}
-
+		
 		public Coroutine SaveWithRoutine(object saveData, Action callback = null) {
 			return Coroutines.StartRoutine(this.SaveRoutine(saveData, callback));
 		}
@@ -84,26 +82,26 @@ namespace VavilichevGD.Architecture.StorageSystem {
 			var thread = new Thread(() => LoadDataTaskThreaded(saveDataByDefault, callback));
 			thread.Start();
 		}
-
+		
 		public Coroutine LoadWithRoutine(object saveDataByDefault, Action<object> callback = null) {
 			return Coroutines.StartRoutine(this.LoadRoutine(saveDataByDefault, callback));
 		}
 
 		private IEnumerator LoadRoutine(object saveDataByDefault, Action<object> callback) {
 			var threadEnded = false;
-			object saveData = null;
+			var gameData = default(object);
 			
 			this.LoadAsync(saveDataByDefault, (loadedData) => {
 				threadEnded = true;
-				saveData = loadedData;
+				gameData = loadedData;
 			});
 			
 			while (!threadEnded)
 				yield return null;
 			
-			callback?.Invoke(saveData);
+			callback?.Invoke(gameData);
 		}
-
+		
 		private void LoadDataTaskThreaded(object saveDataByDefault, Action<object> callback) {
 			var saveData = this.Load(saveDataByDefault);
 			callback?.Invoke(saveData);

@@ -8,7 +8,7 @@ namespace VavilichevGD.Architecture.StorageSystem {
 
 		#region EVENTS
 
-		public event Action<GameData> OnStorageLoadedEvent;
+		public event Action OnStorageLoadedEvent;
 		public event Action OnStorageSaveStartedEvent;
 		public event Action OnStorageSaveCompleteEvent;
 
@@ -29,7 +29,7 @@ namespace VavilichevGD.Architecture.StorageSystem {
 		public static Storage instance {
 			get {
 				if (_instance == null)
-					_instance = new Storage();
+					_instance = new Storage(StorageType.FileStorage);
 				return _instance;
 			}
 		}
@@ -38,17 +38,22 @@ namespace VavilichevGD.Architecture.StorageSystem {
 		public static bool isInitialized => instance.data != null;
 
 		#endregion
-
-
 		
-		public GameData data { get; private set; }
+		
+		private GameData data { get; set; }
 		
 		
 		private IStorageBehavior storageBehavior;
 
 		
-		private Storage() {
-			this.storageBehavior = new LocalStorageBehavior();
+		private Storage(StorageType type) {
+			switch (type) {
+				case StorageType.CloudStorage:
+					throw new NotSupportedException("Cloud storage doesn't supported yet");
+				default:
+					this.storageBehavior = new FileStorageBehavior();
+					break;
+			}
 		}
 		
 		private static BinaryFormatter CreateBinaryFormatter() {
@@ -72,7 +77,7 @@ namespace VavilichevGD.Architecture.StorageSystem {
 		
 		public void Save() {
 			this.OnStorageSaveStartedEvent?.Invoke();
-			this.storageBehavior.Save(this.data);
+			this.storageBehavior.Save(data);
 			this.OnStorageSaveCompleteEvent?.Invoke();
 		}
 
@@ -92,25 +97,41 @@ namespace VavilichevGD.Architecture.StorageSystem {
 		
 		public void Load() {
 			this.data = (GameData) storageBehavior.Load(new GameData());
-			this.OnStorageLoadedEvent?.Invoke(this.data);
+			this.OnStorageLoadedEvent?.Invoke();
 		}
 
-		public void LoadAsync(Action<GameData> callback) {
-			this.storageBehavior.LoadAsync(new GameData(), gameData => {
+		public void LoadAsync(Action callback) {
+			this.storageBehavior.LoadAsync(new GameData(), 
+				gameData => {
 					this.data = (GameData) gameData;
-					callback?.Invoke(this.data);
-					this.OnStorageLoadedEvent?.Invoke(this.data);
-				}
-			);
+					callback?.Invoke();
+					this.OnStorageLoadedEvent?.Invoke();
+				});
 		}
-
-		public Coroutine LoadWithRoutine(Action<GameData> callback = null) {
+		
+		public Coroutine LoadWithRoutine(Action callback = null) {
 			return this.storageBehavior.LoadWithRoutine(new GameData(), loadedData => {
 				this.data = (GameData) loadedData;
-				callback?.Invoke(this.data);
-				this.OnStorageLoadedEvent?.Invoke(this.data);
+				callback?.Invoke();
+				this.OnStorageLoadedEvent?.Invoke();
 			});
 		}
 		
+
+		public T Get<T>(string key) {
+			return this.data.Get<T>(key);
+		}
+		
+		public T Get<T>(string key, T valueByDefault) {
+			return this.data.Get(key, valueByDefault);
+		}
+
+		public void Set<T>(string key, T value) {
+			this.data.Set(key, value);
+		}
+
+		public override string ToString() {
+			return this.data.ToString();
+		}
 	}
 }

@@ -1,29 +1,63 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace VavilichevGD.Architecture.StorageSystem {
 	[Serializable]
-	public sealed class GameData {
+	public sealed class GameData : ISerializationCallbackReceiver {
+
+
+		public List<string> keys;
+		public List<object> values;
+
+		public Dictionary<string, object>  dataMap = new Dictionary<string, object>();
+
 		
-		// ======== EXAMPLE REPLACE YOUR OWN DATA PLEASE
+		public void OnBeforeSerialize() {
+			keys.Clear();
+			values.Clear();
 
-		public int version;
-		public int speed;
-		public int valueInt;
-		public float valueFloat;
-		public Vector3 valueVector3;
-		public Vector2 valueVector2;
+			foreach (var item in dataMap) {
+				keys.Add(item.Key);
+				values.Add(item.Value);
+			}
+		}
 
-		public GameData() {
-			// It is necessary to create values by default in constructor.
-			this.valueInt = Random.Range(0, 10);
-			this.valueFloat = Random.Range(0f, 10f);
-			this.valueVector3 = Vector3.down;
-			this.valueVector2 = Vector2.up;
+		public void OnAfterDeserialize()
+		{
+			dataMap = new Dictionary<string, object>();
+
+			for (int i = 0; i != Math.Min(keys.Count, values.Count); i++)
+				dataMap.Add(keys[i], values[i]);
 		}
 		
-		// ======= END OF EXAMPLE
 
+		public T Get<T>(string key) {
+			this.dataMap.TryGetValue(key, out var foundValue);
+			if (foundValue != null)
+				return (T) foundValue;
+			return default;
+		}
+		
+		public T Get<T>(string key, T valueByDefault) {
+			this.dataMap.TryGetValue(key, out var value);
+			if (value != null)
+				return (T) value;
+
+			this.Set(key, valueByDefault);
+			return valueByDefault;
+		}
+
+		public void Set<T>(string key, T newValue) {
+			this.dataMap[key] = newValue;
+		}
+
+		public override string ToString() {
+			var line = "";
+			foreach (var pair in this.dataMap) 
+				line += $"Pair: {pair.Key} - {pair.Value}\n";
+			return line;
+		}
+		
 	}
 }
