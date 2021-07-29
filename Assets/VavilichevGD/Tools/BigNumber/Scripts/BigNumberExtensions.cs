@@ -31,6 +31,10 @@
 			public static string ToStringTranslated(this double d) {
 				return BigNumberTranslator.Translate(d);
 			}
+			
+			public static string ToStringTranslated(this double d, SystemLanguage language) {
+				return BigNumberTranslator.Translate(d, language);
+			}
 
 		}
 	}
