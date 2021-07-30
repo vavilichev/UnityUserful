@@ -1,10 +1,10 @@
-# BigNumber Attribute
+# ExponentialView Attribute
 
 This asset was developed for making incremental games, where you must use extra large numbers. Asset just shows number in editor in convenient way, using exponential format of number. <br>
-Just use BigNumber attribute for double type.
+Just use ExponentialView attribute for double type.
 
 
-![image](https://user-images.githubusercontent.com/22970240/127550560-fcb4d987-5407-430e-8736-75c1ea6c74d7.png)
+![image](https://user-images.githubusercontent.com/22970240/127616934-6f899e2b-3d67-48f5-8a7c-5852d6e8a150.png)
 
 
 You can fill mantissa and exponent in editor. The limits are: <br>
@@ -13,7 +13,7 @@ From -2 to 307 for exponent.<br>
 <br>
 You cannot write the numbers that are out of this limits, asset automatically clamps it.
 
-![image](https://user-images.githubusercontent.com/22970240/127550783-d9844c2d-1cf7-4c56-8921-08de14067b22.png)
+![image](https://user-images.githubusercontent.com/22970240/127616990-2f79a03d-b109-4b13-8ee6-86338cda7959.png)
 
 
 Asset contains translation of numbers. It will be usefull for incremental games that shows you extra large numbers in short format.
@@ -29,6 +29,6 @@ Or specific translation:
 
 ![image](https://user-images.githubusercontent.com/22970240/127552188-a60cedae-67bb-4dcf-a54f-4362e48073c6.png)
 
-For specific translation check that specified dictionary of language exists. If not write your own. Watch BigNumberDictionaryEn.cs or BigNumberDictionaryRu.cs for details. Dont forget to add it to BigNumberTranslator.cs class.
+For specific translation check that specified dictionary of language exists. If not write your own. Watch ExponentialViewDictionaryEn.cs or ExponentialViewDictionaryRu.cs for details. Dont forget to add it to ExponentialViewTranslator.cs class.
 
-![image](https://user-images.githubusercontent.com/22970240/127552728-b0a635de-6dd6-4d04-a26f-2ba822118427.png)
+![image](https://user-images.githubusercontent.com/22970240/127617090-9dbe8684-1c00-463d-ba00-32e9b6bd7ff8.png)
