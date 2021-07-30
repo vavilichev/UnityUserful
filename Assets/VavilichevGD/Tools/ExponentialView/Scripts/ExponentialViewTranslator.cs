@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 
-namespace VavilichevGD.Tools.Numerics {
-    public static class BigNumberTranslator {
+namespace VavilichevGD.Attributes {
+    public static class ExponentialViewTranslator {
         
         public static bool isInitialized => _dictionaryBase != null;
 
-        private static BigNumberDictionaryBase _dictionaryBase;
+        private static ExponentialViewDictionaryBase _dictionaryBase;
         private static SystemLanguage _language;
 
         public static void UpdateDictionary(SystemLanguage newLanguage = SystemLanguage.English) {
@@ -16,15 +16,15 @@ namespace VavilichevGD.Tools.Numerics {
             switch (_language) {
                 
                 case SystemLanguage.English:
-                    _dictionaryBase = new BigNumberDictionaryEn();
+                    _dictionaryBase = new ExponentialViewDictionaryEn();
                     break;
                 
                 case SystemLanguage.Russian:
-                    _dictionaryBase = new BigNumberDictionaryRu();
+                    _dictionaryBase = new ExponentialViewDictionaryRu();
                     break;
                 
                 default:
-                    _dictionaryBase = new BigNumberDictionaryEn();
+                    _dictionaryBase = new ExponentialViewDictionaryEn();
                     break;
                 
             }

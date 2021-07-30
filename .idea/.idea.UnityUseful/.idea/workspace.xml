@@ -21,14 +21,37 @@
   <component name="ChangeListManager">
     <list default="true" id="d6bda5ec-3c6e-4c7d-9da8-63392464d685" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.UnityUseful/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.UnityUseful/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.UnityUseful/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.UnityUseful/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.UnityUseful/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.UnityUseful/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VavilichevGD/Architecture/Storage/Example/Scenes/StorageExample.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VavilichevGD/Architecture/Storage/Example/Scenes/StorageExample.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VavilichevGD/Architecture/Storage/Example/Scripts/StorageExample.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VavilichevGD/Architecture/Storage/Example/Scripts/StorageExample.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VavilichevGD/Architecture/Storage/Scripts/Behavior/IStorageBehavior.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VavilichevGD/Architecture/Storage/Scripts/Behavior/IStorageBehavior.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VavilichevGD/Architecture/Storage/Scripts/Behavior/LocalStorageBehavior.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VavilichevGD/Architecture/Storage/Scripts/Behavior/LocalStorageBehavior.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VavilichevGD/Architecture/Storage/Scripts/GameData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VavilichevGD/Architecture/Storage/Scripts/GameData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VavilichevGD/Architecture/Storage/Scripts/Storage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/VavilichevGD/Architecture/Storage/Scripts/Storage.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VavilichevGD/Tools/BigNumber.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VavilichevGD/Tools/BigNumber/BigNumberAttribute v. 1.0.unitypackage" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VavilichevGD/Tools/BigNumber/BigNumberAttribute v. 1.0.unitypackage.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VavilichevGD/Tools/BigNumber/Example.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VavilichevGD/Tools/BigNumber/Example/Scenes.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VavilichevGD/Tools/BigNumber/Example/Scenes/BigNumberExample.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VavilichevGD/Tools/BigNumber/Example/Scenes/BigNumberExample.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VavilichevGD/Tools/BigNumber/Example/Scripts.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VavilichevGD/Tools/BigNumber/Example/Scripts/BigNumberExample.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VavilichevGD/Tools/BigNumber/Example/Scripts/BigNumberExample.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VavilichevGD/Tools/BigNumber/ReadMe.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VavilichevGD/Tools/BigNumber/ReadMe.md.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VavilichevGD/Tools/BigNumber/Scripts.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VavilichevGD/Tools/BigNumber/Scripts/BigNumberAttribute.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VavilichevGD/Tools/BigNumber/Scripts/BigNumberAttribute.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VavilichevGD/Tools/BigNumber/Scripts/BigNumberDictionaryBase.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VavilichevGD/Tools/BigNumber/Scripts/BigNumberDictionaryBase.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VavilichevGD/Tools/BigNumber/Scripts/BigNumberDictionaryEn.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VavilichevGD/Tools/BigNumber/Scripts/BigNumberDictionaryEn.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VavilichevGD/Tools/BigNumber/Scripts/BigNumberDictionaryRu.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VavilichevGD/Tools/BigNumber/Scripts/BigNumberDictionaryRu.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VavilichevGD/Tools/BigNumber/Scripts/BigNumberExtensions.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VavilichevGD/Tools/BigNumber/Scripts/BigNumberExtensions.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VavilichevGD/Tools/BigNumber/Scripts/BigNumberTranslator.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VavilichevGD/Tools/BigNumber/Scripts/BigNumberTranslator.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VavilichevGD/Tools/BigNumber/Scripts/BigNumberUtility.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VavilichevGD/Tools/BigNumber/Scripts/BigNumberUtility.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VavilichevGD/Tools/BigNumber/Scripts/Editor.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VavilichevGD/Tools/BigNumber/Scripts/Editor/BigNumberDrawer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VavilichevGD/Tools/BigNumber/Scripts/Editor/BigNumberDrawer.cs.meta" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,20 +62,27 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/VavilichevGD/Architecture/Storage/Scripts/Behavior/LocalStorageBehavior.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/VavilichevGD/Tools/Coroutines/Scripts/Coroutines.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/VavilichevGD/Tools/ExponentialView/Scripts/ExponentialViewDictionaryRu.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/VavilichevGD/Architecture/Storage/Example/Scripts/StorageExample.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/VavilichevGD/Tools/ExponentialView/Example/Scripts/ExponentialViewExample.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/VavilichevGD/Utils/Editor/Builder/Android/Config/AndroidBuildConfig.asset" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/VavilichevGD/Architecture/Storage/Scripts/Behavior/IStorageBehavior.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/VavilichevGD/Gameplay/Dialogues/Example/Scripts/DialogueExample.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/VavilichevGD/Architecture/Storage/Scripts/GameData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/VavilichevGD/Utils/Editor/Builder/Android/AndroidBuildConfig.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/VavilichevGD/Tools/ExponentialView/Scripts/Editor/ExponentialViewDrawer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/VavilichevGD/Gameplay/Dialogues/Example/Scripts/UIWidgetDialogueOptionExample.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/VavilichevGD/Tools/ExponentialView/Scripts/ExponentialViewDictionaryBase.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/VavilichevGD/Tools/ExponentialView/Scripts/ExponentialViewExtensions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/VavilichevGD/Gameplay/Dialogues/Example/Scripts/UIWidgetDialogueOptionsExample.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/VavilichevGD/Architecture/Storage/Scripts/Storage.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/VavilichevGD/Utils/Editor/EditorHelper.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/VavilichevGD/Tools/ExponentialView/Scripts/ExponentialViewUtility.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/VavilichevGD/Tools/ExponentialView/Scripts/ExponentialViewTranslator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/VavilichevGD/Utils/PoolMono.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/VavilichevGD/Utils/Editor/Builder/Android/AndroidBuildHelper.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/VavilichevGD/Tools/ExponentialView/Scripts/ExponentialViewDictionaryEn.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/VavilichevGD/Tools/ExponentialView/Scripts/ExponentialViewAttribute.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -66,6 +96,20 @@
         <option value="$PROJECT_DIR$/Assets/VavilichevGD/Architecture/Storage/Scripts/Behavior/LocalStorageBehavior.cs" />
         <option value="$PROJECT_DIR$/Assets/VavilichevGD/Architecture/Storage/Scripts/Storage.cs" />
         <option value="$PROJECT_DIR$/Assets/VavilichevGD/Architecture/Storage/Example/Scripts/StorageExample.cs" />
+        <option value="$PROJECT_DIR$/Assets/VavilichevGD/Tools/BigNumber/Scripts/BigNumberExtensions.cs" />
+        <option value="$PROJECT_DIR$/Assets/VavilichevGD/Tools/ExponentialView/Scripts/ExponentialViewAttribute.cs" />
+        <option value="$PROJECT_DIR$/Assets/VavilichevGD/Tools/ExponentialView/Scripts/Editor/ExponentialViewDrawer.cs" />
+        <option value="$PROJECT_DIR$/Assets/VavilichevGD/Tools/ExponentialView/Scripts/ExponentialViewDictionaryBase.cs" />
+        <option value="$PROJECT_DIR$/Assets/VavilichevGD/Tools/ExponentialView/Scripts/BigNumberExtensions.cs" />
+        <option value="$PROJECT_DIR$/Assets/VavilichevGD/Tools/ExponentialView/Scripts/ExponentialViewExtensions.cs" />
+        <option value="$PROJECT_DIR$/Assets/VavilichevGD/Tools/ExponentialView/Scripts/BigNumberTranslator.cs" />
+        <option value="$PROJECT_DIR$/Assets/VavilichevGD/Tools/ExponentialView/Scripts/ExponentialViewTranslator.cs" />
+        <option value="$PROJECT_DIR$/Assets/VavilichevGD/Tools/ExponentialView/Scripts/BigNumberUtility.cs" />
+        <option value="$PROJECT_DIR$/Assets/VavilichevGD/Tools/ExponentialView/Scripts/ExponentialViewUtility.cs" />
+        <option value="$PROJECT_DIR$/Assets/VavilichevGD/Tools/ExponentialView/Scripts/ExponentialViewDictionaryRu.cs" />
+        <option value="$PROJECT_DIR$/Assets/VavilichevGD/Tools/ExponentialView/Scripts/ExponentialViewDictionaryEn.cs" />
+        <option value="$PROJECT_DIR$/Assets/VavilichevGD/Tools/ExponentialView/Example/Scripts/BigNumberExample.cs" />
+        <option value="$PROJECT_DIR$/Assets/VavilichevGD/Tools/ExponentialView/Example/Scripts/ExponentialViewExample.cs" />
       </list>
     </option>
   </component>
@@ -114,6 +158,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />

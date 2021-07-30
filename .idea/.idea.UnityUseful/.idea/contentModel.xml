@@ -16,10 +16,8 @@
                 </e>
               </e>
               <e p="Scripts" t="Include">
-                <e p="Behavior" t="Include">
-                  <e p="IStorageBehavior.cs" t="Include" />
-                  <e p="LocalStorageBehavior.cs" t="Include" />
-                </e>
+                <e p="CloudStorage.cs" t="Include" />
+                <e p="FileStorage.cs" t="Include" />
                 <e p="GameData.cs" t="Include" />
                 <e p="Storage.cs" t="Include" />
                 <e p="Surrogates" t="Include">
@@ -92,9 +90,25 @@
             <e p="Coroutines" t="Include">
               <e p="Scripts" t="Include">
                 <e p="Coroutines.cs" t="Include" />
-                <e p="Routine.cs" t="Include" />
-                <e p="RoutineBase.cs" t="Include" />
-                <e p="RoutineWithArg.cs" t="Include" />
+              </e>
+            </e>
+            <e p="ExponentialView" t="Include">
+              <e p="Example" t="Include">
+                <e p="Scripts" t="Include">
+                  <e p="ExponentialViewExample.cs" t="Include" />
+                </e>
+              </e>
+              <e p="Scripts" t="Include">
+                <e p="Editor" t="Include">
+                  <e p="ExponentialViewDrawer.cs" t="Include" />
+                </e>
+                <e p="ExponentialViewAttribute.cs" t="Include" />
+                <e p="ExponentialViewDictionaryBase.cs" t="Include" />
+                <e p="ExponentialViewDictionaryEn.cs" t="Include" />
+                <e p="ExponentialViewDictionaryRu.cs" t="Include" />
+                <e p="ExponentialViewExtensions.cs" t="Include" />
+                <e p="ExponentialViewTranslator.cs" t="Include" />
+                <e p="ExponentialViewUtility.cs" t="Include" />
               </e>
             </e>
           </e>

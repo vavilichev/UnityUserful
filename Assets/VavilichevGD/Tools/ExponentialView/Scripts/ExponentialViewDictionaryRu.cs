@@ -1,5 +1,5 @@
-﻿namespace VavilichevGD.Tools.Numerics {
-    public class BigNumberDictionaryRu : BigNumberDictionaryBase {
+﻿namespace VavilichevGD.Attributes {
+    public class ExponentialViewDictionaryRu : ExponentialViewDictionaryBase {
         protected override string[] dictionary { get; } = {
             "тыс",
             "млн",

@@ -2,9 +2,9 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace VavilichevGD.Tools.Numerics {
-	[CustomPropertyDrawer(typeof(BigNumberAttribute))]
-	public class BigNumberDrawer : PropertyDrawer {
+namespace VavilichevGD.Attributes {
+	[CustomPropertyDrawer(typeof(ExponentialViewAttribute))]
+	public class ExponentialViewDrawer : PropertyDrawer {
 		
 		#region CONSTANTS
 
@@ -36,11 +36,11 @@ namespace VavilichevGD.Tools.Numerics {
 
 			// Draw fields - pass GUIContent.none to each so they are drawn without labels
 			mantissa = EditorGUI.DoubleField(mantissaRect, mantissa);
-			mantissa = ClampMantissa(mantissa, BigNumberUtility.MANTISSA_MIN, BigNumberUtility.MANTISSA_MAX);
+			mantissa = ClampMantissa(mantissa, ExponentialViewUtility.MANTISSA_MIN, ExponentialViewUtility.MANTISSA_MAX);
 
 			EditorGUI.LabelField(tenRect, "+E");
 			exponent = EditorGUI.IntField(exponentRect, exponent);
-			exponent = Mathf.Clamp(exponent, BigNumberUtility.EXPONENT_MIN, BigNumberUtility.EXPONENT_MAX);
+			exponent = Mathf.Clamp(exponent, ExponentialViewUtility.EXPONENT_MIN, ExponentialViewUtility.EXPONENT_MAX);
 
 
 			EditorGUI.EndProperty();

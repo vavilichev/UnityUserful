@@ -1,7 +1,7 @@
 ﻿using System;
 
-namespace VavilichevGD.Tools.Numerics {
-	public static class BigNumberUtility {
+namespace VavilichevGD.Attributes {
+	public static class ExponentialViewUtility {
 
 		#region CONSTANTS
 

@@ -2,8 +2,8 @@
 using System.Globalization;
 using UnityEngine;
 
-namespace VavilichevGD.Tools.Numerics {
-    public abstract class BigNumberDictionaryBase {
+namespace VavilichevGD.Attributes {
+    public abstract class ExponentialViewDictionaryBase {
 
         protected abstract string[] dictionary { get; }
 

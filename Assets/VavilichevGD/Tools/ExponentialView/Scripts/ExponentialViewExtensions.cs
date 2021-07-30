@@ -1,8 +1,8 @@
 ﻿	using System;
 	using UnityEngine;
 
-	namespace VavilichevGD.Tools.Numerics {
-		public static class BigNumberExtensions {
+	namespace VavilichevGD.Attributes {
+		public static class ExponentialViewExtensions {
 
 			public static int GetExponent(this double d) {
 				var doubleParts = ExtractScientificNotationParts(d);
@@ -25,15 +25,15 @@
 			}
 
 			public static string ToStringFormatted(this double d) {
-				return BigNumberTranslator.Translate(d, SystemLanguage.English);
+				return ExponentialViewTranslator.Translate(d, SystemLanguage.English);
 			}
 
 			public static string ToStringTranslated(this double d) {
-				return BigNumberTranslator.Translate(d);
+				return ExponentialViewTranslator.Translate(d);
 			}
 			
 			public static string ToStringTranslated(this double d, SystemLanguage language) {
-				return BigNumberTranslator.Translate(d, language);
+				return ExponentialViewTranslator.Translate(d, language);
 			}
 
 		}

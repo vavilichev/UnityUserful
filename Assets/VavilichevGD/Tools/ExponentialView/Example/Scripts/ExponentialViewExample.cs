@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using VavilichevGD.Tools.Numerics;
+using VavilichevGD.Attributes;
 
-public class BigNumberExample : MonoBehaviour {
+public class ExponentialViewExample : MonoBehaviour {
 
 	#region CONSTANTS
 
@@ -10,8 +10,8 @@ public class BigNumberExample : MonoBehaviour {
 
 	#endregion
 	
-		[SerializeField, BigNumber] private double minValueForRandom;
-		[SerializeField, BigNumber] private double maxValueForRandom;
+		[SerializeField, ExponentialView] private double minValueForRandom;
+		[SerializeField, ExponentialView] private double maxValueForRandom;
 		[Space]
 		[SerializeField] private Button btnSave;
 		[SerializeField] private Button btnLoad;
@@ -54,7 +54,7 @@ public class BigNumberExample : MonoBehaviour {
 		}
 
 		private void RandomizeNumber() {
-			_number = BigNumberUtility.GetRandomBigNumber(minValueForRandom, maxValueForRandom);
+			_number = ExponentialViewUtility.GetRandomBigNumber(minValueForRandom, maxValueForRandom);
 		}
 
 
