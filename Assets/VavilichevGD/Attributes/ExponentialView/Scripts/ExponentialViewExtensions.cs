@@ -12,7 +12,7 @@
 			public static double GetMantissa(this double d, int digits) {
 				var doubleParts = ExtractScientificNotationParts(d);
 				var mantissa = Convert.ToDouble(doubleParts[0]);
-				var roundedMantissa = Math.Round(mantissa, digits);
+				var roundedMantissa = Math.Min(Math.Round(mantissa, digits), 9.99d);
 				return roundedMantissa;
 			}
 

@@ -758,7 +758,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minValueForRandom: 0
-  maxValueForRandom: 10
+  maxValueForRandom: 99.9
   btnSave: {fileID: 1499727541}
   btnLoad: {fileID: 1213620569}
   btnRandomize: {fileID: 468219740}

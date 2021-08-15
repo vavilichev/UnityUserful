@@ -23,7 +23,7 @@ namespace VavilichevGD.Attributes {
 			EditorGUI.BeginProperty(position, label, property);
 
 			// Draw label
-			position = EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Passive), label);
+			position = EditorGUI.PrefixLabel(position, label);
 
 			// Calculate rects
 			var mantissaRect = new Rect(position.x, position.y, position.width - 95, position.height);
@@ -52,7 +52,7 @@ namespace VavilichevGD.Attributes {
 		private void ValidateProperty(SerializedProperty property) {
 			var type = property.type;
 			if (type != DOUBLE_TYPE)
-				throw new Exception($"BigNumber attribute works only with double value ({property.displayName})");
+				throw new Exception($"ExponentialView attribute works only with double value ({property.displayName})");
 		}
 		
 		private double ClampMantissa(double value, double min, double max) {
