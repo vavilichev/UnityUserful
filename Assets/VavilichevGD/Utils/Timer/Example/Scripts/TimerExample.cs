@@ -1,0 +1,108 @@
+﻿using UnityEngine;
+using UnityEngine.UI;
+
+namespace VavilichevGD.Utils.Timing.Example {
+	public class TimerExample : MonoBehaviour {
+
+		[SerializeField] private TimerType _timerType;
+		[SerializeField] private float _remainingSeconds;
+		[SerializeField] private Button _buttonStart;
+		[SerializeField] private Button _buttonPause;
+		[SerializeField] private Button _buttonStop;
+		[Space] [SerializeField] private Text _textType;
+		[SerializeField] private Text _textValue;
+
+		private Color _colorPaused = Color.yellow;
+		private Color _colorUnpaused = Color.white;
+
+
+		private Timer _timer;
+
+		private void Awake() {
+			UpdatePauseButtonState();
+			UpdateTimerTypeField();
+
+			_textValue.text = $"Value: {_remainingSeconds.ToString()}";
+		}
+
+		private void OnEnable() {
+			_buttonStart.onClick.AddListener(OnStartButtonClick);
+			_buttonPause.onClick.AddListener(OnPauseButtonClick);
+			_buttonStop.onClick.AddListener(OnStopButtonClick);
+		}
+
+		private void OnDisable() {
+			_buttonStart.onClick.RemoveListener(OnStartButtonClick);
+			_buttonPause.onClick.RemoveListener(OnPauseButtonClick);
+			_buttonStop.onClick.RemoveListener(OnStopButtonClick);
+		}
+
+		private void SubscribeOnTimerEvents() {
+			_timer.OnTimerValueChangedEvent += OnTimerValueChanged;
+			_timer.OnTimerFinishedEvent += OnTimerFinished;
+		}
+
+		private void UnSubscribeFromTimerEvents() {
+			_timer.OnTimerValueChangedEvent -= OnTimerValueChanged;
+			_timer.OnTimerFinishedEvent -= OnTimerFinished;
+		}
+
+		private void UpdatePauseButtonState() {
+			if (_timer == null) {
+				_buttonPause.image.color = _colorUnpaused;
+				return;
+			}
+
+			var color = _timer.isPaused ? _colorPaused : _colorUnpaused;
+			_buttonPause.image.color = color;
+
+			var text = _timer.isPaused ? "Unpause" : "Pause";
+			var textField = _buttonPause.GetComponentInChildren<Text>();
+			textField.text = text;
+		}
+
+		private void UpdateTimerTypeField() {
+			_textType.text = $"Type: {_timerType.ToString()}";
+		}
+
+
+
+		#region CALLBACKS
+
+		private void OnStartButtonClick() {
+			if (_timer != null)
+				UnSubscribeFromTimerEvents();
+
+			_timer = new Timer(_timerType, _remainingSeconds);
+			UpdateTimerTypeField();
+
+			SubscribeOnTimerEvents();
+			_timer.Start();
+			UpdatePauseButtonState();
+		}
+
+		private void OnPauseButtonClick() {
+			if (_timer.isPaused)
+				_timer.Unpause();
+			else
+				_timer.Pause();
+
+			UpdatePauseButtonState();
+		}
+
+		private void OnStopButtonClick() {
+			_timer.Stop();
+			UpdatePauseButtonState();
+		}
+
+		private void OnTimerFinished() {
+			_textValue.text = "Value: Finished (0)";
+		}
+
+		private void OnTimerValueChanged(float remainingSeconds) {
+			_textValue.text = $"Value: {remainingSeconds.ToString()}";
+		}
+
+		#endregion
+	}
+}
