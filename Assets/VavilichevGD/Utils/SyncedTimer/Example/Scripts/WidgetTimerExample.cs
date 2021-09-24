@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 
 namespace VavilichevGD.Utils.Timing.Example {
-	public class TimerExample : MonoBehaviour {
+	public class WidgetTimerExample : MonoBehaviour {
 
 		[SerializeField] private TimerType _timerType;
 		[SerializeField] private float _remainingSeconds;
@@ -16,7 +16,7 @@ namespace VavilichevGD.Utils.Timing.Example {
 		private Color _colorUnpaused = Color.white;
 
 
-		private Timer _timer;
+		private SyncedTimer _timer;
 
 		private void Awake() {
 			UpdatePauseButtonState();
@@ -42,7 +42,7 @@ namespace VavilichevGD.Utils.Timing.Example {
 			_timer.OnTimerFinishedEvent += OnTimerFinished;
 		}
 
-		private void UnSubscribeFromTimerEvents() {
+		private void UnsubscribeFromTimerEvents() {
 			_timer.OnTimerValueChangedEvent -= OnTimerValueChanged;
 			_timer.OnTimerFinishedEvent -= OnTimerFinished;
 		}
@@ -70,18 +70,20 @@ namespace VavilichevGD.Utils.Timing.Example {
 		#region CALLBACKS
 
 		private void OnStartButtonClick() {
-			if (_timer != null)
-				UnSubscribeFromTimerEvents();
-
-			_timer = new Timer(_timerType, _remainingSeconds);
+			if (_timer == null) {
+				_timer = new SyncedTimer(_timerType);
+				SubscribeOnTimerEvents();
+			}
+			
 			UpdateTimerTypeField();
-
-			SubscribeOnTimerEvents();
-			_timer.Start();
+			_timer.Start(_remainingSeconds);
 			UpdatePauseButtonState();
 		}
 
 		private void OnPauseButtonClick() {
+			if (_timer == null)
+				return;
+			
 			if (_timer.isPaused)
 				_timer.Unpause();
 			else
@@ -91,6 +93,9 @@ namespace VavilichevGD.Utils.Timing.Example {
 		}
 
 		private void OnStopButtonClick() {
+			if (_timer == null)
+				return;
+			
 			_timer.Stop();
 			UpdatePauseButtonState();
 		}

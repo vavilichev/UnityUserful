@@ -8,8 +8,8 @@ namespace VavilichevGD.Utils.Timing {
 
 		public event Action<float> OnUpdateTimeTickedEvent;
 		public event Action<float> OnUpdateTimeUnscaledTickedEvent; 
-		public event Action OnOneSecondTickedEvent;
-		public event Action OnOneSecondUnscaledTickedEvent;
+		public event Action OnOneSyncedSecondTickedEvent;
+		public event Action OnOneSyncedSecondUnscaledTickedEvent;
 
 		#endregion
 
@@ -18,8 +18,8 @@ namespace VavilichevGD.Utils.Timing {
 				if (_instance == null) {
 					var go = new GameObject("[TIME INVOKER]");
 					_instance = go.AddComponent<TimeInvoker>();
+					DontDestroyOnLoad(go);
 				}
-
 				return _instance;
 			}
 		}
@@ -35,7 +35,7 @@ namespace VavilichevGD.Utils.Timing {
 			_oneSecTimer += deltaTimer;
 			if (_oneSecTimer >= 1f) {
 				_oneSecTimer -= 1f;
-				OnOneSecondTickedEvent?.Invoke();
+				OnOneSyncedSecondTickedEvent?.Invoke();
 			}
 
 			var unscaledDeltaTimer = Time.unscaledDeltaTime;
@@ -43,7 +43,7 @@ namespace VavilichevGD.Utils.Timing {
 			_oneSecUnscaledTimer += unscaledDeltaTimer;
 			if (_oneSecUnscaledTimer >= 1f) {
 				_oneSecUnscaledTimer -= 1f;
-				OnOneSecondUnscaledTickedEvent?.Invoke();
+				OnOneSyncedSecondUnscaledTickedEvent?.Invoke();
 			}
 		}
 	}

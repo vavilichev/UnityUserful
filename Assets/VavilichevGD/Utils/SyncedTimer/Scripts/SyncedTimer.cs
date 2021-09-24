@@ -2,7 +2,7 @@
 using UnityEngine;
 
 namespace VavilichevGD.Utils.Timing {
-	public class Timer {
+	public class SyncedTimer {
 
 		#region EVENTS
 
@@ -13,21 +13,21 @@ namespace VavilichevGD.Utils.Timing {
 		
 		
 		public TimerType type { get; }
+		public bool isActive { get; private set; }
 		public bool isPaused { get; private set; }
 		public float remainingSeconds { get; private set; }
 		
 
-		public Timer(TimerType type) {
+		public SyncedTimer(TimerType type) {
 			this.type = type;
 		}
 
-		public Timer(TimerType type, float seconds) {
+		public SyncedTimer(TimerType type, float seconds) {
 			this.type = type;
 			
 			SetTime(seconds);
 		}
 
-		
 		
 		public void SetTime(float seconds) {
 			remainingSeconds = seconds;
@@ -35,6 +35,9 @@ namespace VavilichevGD.Utils.Timing {
 		}
 
 		public void Start() {
+			if (isActive)
+				return;
+			
 			if (System.Math.Abs(remainingSeconds) < Mathf.Epsilon) {
 #if DEBUG
 				Debug.LogError("TIMER: You are trying start timer with remaining seconds equal 0.");
@@ -42,38 +45,56 @@ namespace VavilichevGD.Utils.Timing {
 				OnTimerFinishedEvent?.Invoke();
 			}
 
+			isActive = true;
 			isPaused = false;
-			Subscribe();
+			SubscribeOnTimeInvokerEvents();
+			
 			OnTimerValueChangedEvent?.Invoke(remainingSeconds);
 		}
 
 		public void Start(float seconds) {
+			if (isActive)
+				return;
+			
 			SetTime(seconds);
 			Start();
 		}
 
 		public void Pause() {
+			if (isPaused || !isActive)
+				return;
+			
 			isPaused = true;
+			UnsubscribeFromTimeInvokerEvents();
 			
 			OnTimerValueChangedEvent?.Invoke(remainingSeconds);
 		}
 
 		public void Unpause() {
+			if (!isPaused || !isActive)
+				return;
+			
 			isPaused = false;
+			SubscribeOnTimeInvokerEvents();
 
 			OnTimerValueChangedEvent?.Invoke(remainingSeconds);
 		}
 
 		public void Stop() {
-			Unsubscribe();
+			if (!isActive)
+				return;
+			
+			UnsubscribeFromTimeInvokerEvents();
 			remainingSeconds = 0f;
+			isActive = false;
+			isPaused = false;
 
 			OnTimerValueChangedEvent?.Invoke(remainingSeconds);
 			OnTimerFinishedEvent?.Invoke();
 		}
 
 		
-		private void Subscribe() {
+		private void SubscribeOnTimeInvokerEvents() {
 			switch (type) {
 				case TimerType.UpdateTick:
 					TimeInvoker.instance.OnUpdateTimeTickedEvent += OnTicked;
@@ -82,17 +103,17 @@ namespace VavilichevGD.Utils.Timing {
 					TimeInvoker.instance.OnUpdateTimeUnscaledTickedEvent += OnTicked;
 					break;
 				case TimerType.OneSecTick:
-					TimeInvoker.instance.OnOneSecondTickedEvent += OnSecondTicked;
+					TimeInvoker.instance.OnOneSyncedSecondTickedEvent += OnSyncedSecondTicked;
 					break;
 				case TimerType.OneSecTickUnscaled:
-					TimeInvoker.instance.OnOneSecondUnscaledTickedEvent += OnSecondTicked;
+					TimeInvoker.instance.OnOneSyncedSecondUnscaledTickedEvent += OnSyncedSecondTicked;
 					break;
 				default:
 					throw new ArgumentOutOfRangeException();
 			}
 		}
 		
-		private void Unsubscribe() {
+		private void UnsubscribeFromTimeInvokerEvents() {
 			switch (type) {
 				case TimerType.UpdateTick:
 					TimeInvoker.instance.OnUpdateTimeTickedEvent -= OnTicked;
@@ -101,16 +122,15 @@ namespace VavilichevGD.Utils.Timing {
 					TimeInvoker.instance.OnUpdateTimeUnscaledTickedEvent -= OnTicked;
 					break;
 				case TimerType.OneSecTick:
-					TimeInvoker.instance.OnOneSecondTickedEvent -= OnSecondTicked;
+					TimeInvoker.instance.OnOneSyncedSecondTickedEvent -= OnSyncedSecondTicked;
 					break;
 				case TimerType.OneSecTickUnscaled:
-					TimeInvoker.instance.OnOneSecondUnscaledTickedEvent -= OnSecondTicked;
+					TimeInvoker.instance.OnOneSyncedSecondUnscaledTickedEvent -= OnSyncedSecondTicked;
 					break;
 				default:
 					throw new ArgumentOutOfRangeException();
 			}
 		}
-
 
 		private void CheckFinish() {
 			if (remainingSeconds <= 0f) 
@@ -123,17 +143,11 @@ namespace VavilichevGD.Utils.Timing {
 		#region CALLBACKS
 
 		private void OnTicked(float deltaTime) {
-			if (isPaused)
-				return;
-			
 			remainingSeconds -= deltaTime;
 			CheckFinish();
 		}
 		
-		private void OnSecondTicked() {
-			if (isPaused)
-				return;
-
+		private void OnSyncedSecondTicked() {
 			remainingSeconds -= 1;
 			CheckFinish();
 		}
