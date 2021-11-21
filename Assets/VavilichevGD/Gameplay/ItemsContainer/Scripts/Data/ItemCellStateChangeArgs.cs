@@ -1,12 +1,13 @@
 ﻿namespace VavilichevGD.Gameplay.Data {
-	public class ItemCellStateChangeArgs {
+	public struct ItemCellStateChangeArgs {
 		public string cellId;
 		public string itemId;
 		public int itemsAmountOld;
 		public int itemsAmountNew;
 		public int itemsRemainder;
-		public string error;
+		public string errorText;
+		public ItemsContainerErrorCode errorCode;
 
-		public bool success => string.IsNullOrWhiteSpace(error);
+		public bool success => string.IsNullOrWhiteSpace(errorText);
 	}
 }

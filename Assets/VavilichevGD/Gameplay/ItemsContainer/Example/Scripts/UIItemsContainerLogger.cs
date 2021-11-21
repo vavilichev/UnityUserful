@@ -25,7 +25,7 @@ namespace VavilichevGD.Gameplay.Examples {
 
 		private void OnItemsContainerStateChanged(ItemCellStateChangeArgs e) {
 			if (!e.success) {
-				_textLogLine.text = $"{e.error}";
+				_textLogLine.text = $"{e.errorText}";
 			}
 			else {
 				_textLogLine.text =

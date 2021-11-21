@@ -17,13 +17,18 @@ namespace VavilichevGD.Gameplay {
 			this.id = id;
 		}
 
-		public void Clear() {
+		public virtual void Clear() {
 			itemId = null;
 			itemsAmount = 0;
 			capacity = 0;
+			
+			var result = new ItemCellStateChangeArgs();
+			result.cellId = id;
+			
+			OnItemCellStateChangedEvent?.Invoke(result);
 		}
 		
-		public void AddItems(IItem item, int amount, out int remainder) {
+		public virtual void AddItems(IItem item, int amount, out int remainder) {
 			var result = new ItemCellStateChangeArgs();
 
 			result.cellId = id;
@@ -32,7 +37,8 @@ namespace VavilichevGD.Gameplay {
 			result.itemsAmountNew = itemsAmount;
 
 			if (isFull) {
-				result.error = $"Cell is full";
+				result.errorText = $"Cell is full";
+				result.errorCode = ItemsContainerErrorCode.CellIsFull;
 				result.itemsRemainder = amount;
 				remainder = amount;
 				
@@ -46,8 +52,9 @@ namespace VavilichevGD.Gameplay {
 			}
 			
 			if (itemId != item.id) {
-				result.error =
+				result.errorText =
 					$"You are trying to add item with different id. Item in cel is: {itemId} and you are adding: {item.id}";
+				result.errorCode = ItemsContainerErrorCode.CompareDifferentItems;
 				result.itemsRemainder = amount;
 				remainder = amount;
 
@@ -71,7 +78,7 @@ namespace VavilichevGD.Gameplay {
 			OnItemCellStateChangedEvent?.Invoke(result);
 		}
 
-		public void RemoveItems(IItem item, int amount, out int remainder) {
+		public virtual void RemoveItems(IItem item, int amount, out int remainder) {
 			var result = new ItemCellStateChangeArgs();
 
 			result.cellId = id;
@@ -82,23 +89,26 @@ namespace VavilichevGD.Gameplay {
 			remainder = amount;
 
 			if (isEmpty) {
-				result.error = $"Cell is empty";
+				result.errorText = $"Cell is empty";
+				result.errorCode = ItemsContainerErrorCode.CellIsEmpty;
 				
 				OnItemCellStateChangedEvent?.Invoke(result);
 				return;
 			}
 
 			if (itemId != item.id) {
-				result.error =
+				result.errorText =
 					$"You are trying to remove item with different id. Item in cel is: {itemId} and you are removing: {item.id}";
+				result.errorCode = ItemsContainerErrorCode.CompareDifferentItems;
 				
 				OnItemCellStateChangedEvent?.Invoke(result);
 				return;
 			}
 
 			if (itemsAmount < amount) {
-				result.error =
+				result.errorText =
 					$"Not enough items in the cell. Cell has {itemsAmount} items, and you are trying to remove {amount}";
+				result.errorCode = ItemsContainerErrorCode.NotEnoughItems;
 				result.itemsAmountNew = 0;
 				result.itemsRemainder = amount - itemsAmount;
 				remainder = result.itemsRemainder;

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using VavilichevGD.Gameplay.Data;
 
@@ -7,57 +8,62 @@ namespace VavilichevGD.Gameplay {
 		public event Action<ItemCellStateChangeArgs> OnItemsContainerStateChangedEvent;
 		
 		public string id { get; }
-		public IItemCell[] itemCells { get; }
+		public IItemCell[] itemCells => _itemCellsMap.Values.ToArray();
+		
+		protected Dictionary<string, IItemCell> _itemCellsMap { get; }
 
 		public ItemsContainer(string id, IItemCell[] itemCells) {
 			this.id = id;
-			this.itemCells = itemCells;
+
+			_itemCellsMap = new Dictionary<string, IItemCell>();
+			
+			foreach (var itemCell in itemCells) {
+				_itemCellsMap[itemCell.id] = itemCell;
+			}
 
 			Subscribe();
 		}
 
 		public IItemCell GetCellData(string cellId) {
-			return itemCells.FirstOrDefault(c => c.id == cellId);
+			_itemCellsMap.TryGetValue(cellId, out var result);
+			
+			return result;
 		}
 
-		public bool HasEnoughItems(string itemId, int requiredItemsCount) {
+		public virtual bool HasEnoughItems(string itemId, int requiredItemsCount) {
 			var itemsCount = GetItemAmount(itemId);
 			return itemsCount >= requiredItemsCount;
 		}
 
 		public int GetItemAmount(string itemId) {
 			var sum = 0;
-			var allCellsWithSameItem = itemCells.Where(c => c.itemId == itemId);
+			var cells = itemCells;
 
-			foreach (var cellData in allCellsWithSameItem) {
-				sum += cellData.itemsAmount;
+			foreach (var itemCell in cells) {
+				if (itemCell.itemId == itemId) {
+					sum += itemCell.itemsAmount;
+				}
 			}
 
 			return sum;
 		}
 		
-		public void AddItems(Item item, int amount, Action<ItemCellStateChangeArgs> callback) {
+		public virtual void AddItems(Item item, int amount, Action<ItemCellStateChangeArgs> callback) {
 			AddItemsToAnyCellWithSameItem(item, amount);
 		}
 
-		private void AddItemsToAnyCellWithSameItem(Item item, int amount) {
-			var cellsWithTheSameItem = itemCells.Where(cellData => !cellData.isFull && cellData.itemId == item.id).ToArray();
-			var cellsCount = cellsWithTheSameItem.Length;
+		protected virtual void AddItemsToAnyCellWithSameItem(Item item, int amount) {
 			var amountToAdd = amount;
+			var cells = itemCells;
 
-			if (cellsCount == 0) {
-				AddToAnyEmptyCell(item, amount);
-				return;
-			}
-
-			for (int i = 0; i < cellsCount; i++) {
-				var cellData = cellsWithTheSameItem[i];
-
-				cellData.AddItems(item, amountToAdd, out var remainder);
-
-				amountToAdd = remainder;
-				if (remainder == 0) {
-					break;
+			foreach (var itemCell in cells) {
+				if (itemCell.itemId == item.id) {
+					itemCell.AddItems(item, amountToAdd, out var remainder);
+					amountToAdd = remainder;
+					
+					if (remainder == 0) {
+						break;
+					}
 				}
 			}
 
@@ -66,36 +72,24 @@ namespace VavilichevGD.Gameplay {
 			}
 		}
 
-		private void AddToAnyEmptyCell(Item item, int amount) {
-			var emptyCells = itemCells.Where(cellData => cellData.isEmpty).ToArray();
-			var cellsCount = emptyCells.Length;
+		protected virtual void AddToAnyEmptyCell(Item item, int amount) {
 			var amountToAdd = amount;
+			var cells = itemCells;
 			
-			if (cellsCount == 0) {
-				var result = new ItemCellStateChangeArgs {
-					error = $"There is no empty cells",
-					itemId = item.id,
-					itemsRemainder = amount
-				};
-
-				OnItemsContainerStateChangedEvent?.Invoke(result);
-				return;
-			}
-			
-			for (int i = 0; i < cellsCount; i++) {
-				var cellData = emptyCells[i];
-
-				cellData.AddItems(item, amountToAdd, out var remainder);
-				
-				amountToAdd = remainder;
-				if (remainder == 0) {
-					break;
+			foreach (var itemCell in cells) {
+				if (itemCell.isEmpty) {
+					itemCell.AddItems(item, amountToAdd, out var remainder);
+					amountToAdd = remainder;
+					
+					if (remainder == 0) {
+						break;
+					}
 				}
 			}
 			
 			if (amountToAdd > 0) {
 				var result = new ItemCellStateChangeArgs {
-					error = $"Not all of items can be placed in container. Extra items amount: {amountToAdd}",
+					errorText = $"Not all of items can be placed in container. Extra items amount: {amountToAdd}",
 					itemId = item.id,
 					itemsRemainder = amountToAdd
 				};
@@ -104,8 +98,8 @@ namespace VavilichevGD.Gameplay {
 			}
 		}
 		
-		public void AddItemsToCell(Item item, int amount, string cellId) {
-			var cellData = itemCells.FirstOrDefault(c => c.id == cellId);
+		public virtual void AddItemsToCell(Item item, int amount, string cellId) {
+			var cellData = GetCellData(cellId);
 			var result = new ItemCellStateChangeArgs {
 				cellId = cellId,
 				itemId = item.id,
@@ -116,7 +110,7 @@ namespace VavilichevGD.Gameplay {
 				if (!cellData.isEmpty) {
 					if (cellData.itemId != item.id) {
 						result.itemsRemainder = amount;
-						result.error = $"Cell contains another item: Cell contains {cellData.itemId}, you trying to add: {item.id}. Cell: {cellData.id}";
+						result.errorText = $"Cell contains another item: Cell contains {cellData.itemId}, you trying to add: {item.id}. Cell: {cellData.id}";
 					
 						OnItemsContainerStateChangedEvent?.Invoke(result);
 						return;
@@ -124,7 +118,7 @@ namespace VavilichevGD.Gameplay {
 
 					if (cellData.isFull) {
 						result.itemsRemainder = amount;
-						result.error = $"Cell is full {cellData.id}";
+						result.errorText = $"Cell is full {cellData.id}";
 
 						OnItemsContainerStateChangedEvent?.Invoke(result);
 					}
@@ -135,59 +129,58 @@ namespace VavilichevGD.Gameplay {
 			}
 			else {
 				result.itemsRemainder = amount;
-				result.error = $"There is no cell with id: {cellId}";
+				result.errorText = $"There is no cell with id: {cellId}";
 				
 				OnItemsContainerStateChangedEvent?.Invoke(result);
 			}
 		}
 
-		public void RemoveItems(Item item, int amount, out int remainder) {
+		public virtual void RemoveItems(Item item, int amount, out int remainder) {
 			remainder = amount;
 			
 			if (!HasEnoughItems(item.id, amount)) {
 				var result = new ItemCellStateChangeArgs {
 					itemId = item.id,
 					itemsRemainder = amount,
-					error = $"You do not have enough items. Required: {amount}"
+					errorText = $"You do not have enough items. Required: {amount}"
 				};
 
 				OnItemsContainerStateChangedEvent?.Invoke(result);
 				return;
 			}
 			
-			var cellsWithTheSameItem = itemCells.Where(cellData => cellData.itemId == item.id).ToArray();
-			var cellsCount = cellsWithTheSameItem.Length;
 			var amountToRemove = amount;
+			var cells = itemCells;
 
-			if (cellsCount == 0) {
+			foreach (var itemCell in cells) {
+				if (itemCell.itemId == item.id) {
+					itemCell.RemoveItems(item, amountToRemove, out remainder);
+					amountToRemove = remainder;
+				}
+
+				if (amountToRemove <= 0) {
+					var result = new ItemCellStateChangeArgs {
+						itemId = item.id
+					};
+					
+					OnItemsContainerStateChangedEvent?.Invoke(result);
+					return;
+				}
+			}
+
+			if (amountToRemove == amount) {
 				var result = new ItemCellStateChangeArgs {
-					error = $"There is no cells with item: {item.id}",
+					errorText = $"There is no cells with item: {item.id}",
 					itemId = item.id,
 					itemsRemainder = amount
 				};
 
 				OnItemsContainerStateChangedEvent?.Invoke(result);
-				return;
-			}
-
-			for (int i = 0; i < cellsCount; i++) {
-				
-				if (amountToRemove == 0) {
-					return;
-				}
-
-				var cellData = cellsWithTheSameItem[i];
-
-				cellData.RemoveItems(item, amountToRemove, out remainder);
-				amountToRemove = remainder;
-				
-				if (amountToRemove <= 0)
-					return;
 			}
 		}
 
-		public void RemoveItemsFromCell(Item item, int amount, string cellId, out int remainder) {
-			var cellData = itemCells.FirstOrDefault(c => c.id == cellId);
+		public virtual void RemoveItemsFromCell(Item item, int amount, string cellId, out int remainder) {
+			var cellData = GetCellData(cellId);
 			remainder = amount;
 			
 			if (cellData != null) {
@@ -198,20 +191,22 @@ namespace VavilichevGD.Gameplay {
 					cellId = cellId,
 					itemId = item.id,
 					itemsRemainder = amount,
-					error = $"There is no cell with id: {cellId}"
+					errorText = $"There is no cell with id: {cellId}"
 				};
 				
 				OnItemsContainerStateChangedEvent?.Invoke(result);
 			}
 		}
 
-		private void Subscribe() {
-			foreach (var itemCell in itemCells) {
+		protected virtual void Subscribe() {
+			var cells = itemCells;
+			
+			foreach (var itemCell in cells) {
 				itemCell.OnItemCellStateChangedEvent += OnItemCellStateChanged;
 			}
 		}
 
-		private void OnItemCellStateChanged(ItemCellStateChangeArgs e) {
+		protected virtual void OnItemCellStateChanged(ItemCellStateChangeArgs e) {
 			OnItemsContainerStateChangedEvent?.Invoke(e);
 		}
 	}

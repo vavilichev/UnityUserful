@@ -1,18 +1,22 @@
-﻿using VavilichevGD.Gameplay.Data;
+﻿using System.Collections.Generic;
+using VavilichevGD.Gameplay.Data;
 
 namespace VavilichevGD.Gameplay.Extensions {
 	public static class ItemsContainerExtensions {
 		public static ItemsContainerData ToData(this IItemsContainer itemsContainer) {
-			var itemsContainerData = new ItemsContainerData();
-
-			itemsContainerData.id = itemsContainer.id;
-
+			var itemCellDatas = new List<ItemCellData>();
 			var itemsCount = itemsContainer.itemCells.Length;
+			
 			for (int i = 0; i < itemsCount; i++) {
 				var cell = itemsContainer.itemCells[i];
 
-				itemsContainerData.itemCellDatas.Add(cell.ToData());
+				itemCellDatas.Add(cell.ToData());
 			}
+
+			var itemsContainerData = new ItemsContainerData {
+				id = itemsContainer.id,
+				itemCellDatas = itemCellDatas 
+			};
 
 			return itemsContainerData;
 		}

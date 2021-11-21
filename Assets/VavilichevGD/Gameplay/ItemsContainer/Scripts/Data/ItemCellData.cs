@@ -2,7 +2,7 @@
 
 namespace VavilichevGD.Gameplay.Data {
 	[Serializable]
-	public class ItemCellData {
+	public struct ItemCellData {
 		public string cellId;
 		public string itemId;
 		public int itemsAmount;
