@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace VavilichevGD.Utils.Timing.Example {
-	public class WidgetTimerExample : MonoBehaviour {
-
+namespace VavilichevGD.Utils.Timing.Example
+{
+	public class WidgetTimerExample : MonoBehaviour
+	{
 		[SerializeField] private TimerType _timerType;
 		[SerializeField] private float _remainingSeconds;
 		[SerializeField] private Button _buttonStart;
@@ -14,41 +15,46 @@ namespace VavilichevGD.Utils.Timing.Example {
 
 		private Color _colorPaused = Color.yellow;
 		private Color _colorUnpaused = Color.white;
-
-
 		private SyncedTimer _timer;
 
-		private void Awake() {
+		private void Awake()
+		{
 			UpdatePauseButtonState();
 			UpdateTimerTypeField();
 
 			_textValue.text = $"Value: {_remainingSeconds.ToString()}";
 		}
 
-		private void OnEnable() {
+		private void OnEnable()
+		{
 			_buttonStart.onClick.AddListener(OnStartButtonClick);
 			_buttonPause.onClick.AddListener(OnPauseButtonClick);
 			_buttonStop.onClick.AddListener(OnStopButtonClick);
 		}
 
-		private void OnDisable() {
+		private void OnDisable()
+		{
 			_buttonStart.onClick.RemoveListener(OnStartButtonClick);
 			_buttonPause.onClick.RemoveListener(OnPauseButtonClick);
 			_buttonStop.onClick.RemoveListener(OnStopButtonClick);
 		}
 
-		private void SubscribeOnTimerEvents() {
-			_timer.OnTimerValueChangedEvent += OnTimerValueChanged;
-			_timer.OnTimerFinishedEvent += OnTimerFinished;
+		private void SubscribeOnTimerEvents()
+		{
+			_timer.TimerValueChanged += TimerValueChanged;
+			_timer.TimerFinished += TimerFinished;
 		}
 
-		private void UnsubscribeFromTimerEvents() {
-			_timer.OnTimerValueChangedEvent -= OnTimerValueChanged;
-			_timer.OnTimerFinishedEvent -= OnTimerFinished;
+		private void UnsubscribeFromTimerEvents()
+		{
+			_timer.TimerValueChanged -= TimerValueChanged;
+			_timer.TimerFinished -= TimerFinished;
 		}
 
-		private void UpdatePauseButtonState() {
-			if (_timer == null) {
+		private void UpdatePauseButtonState()
+		{
+			if (_timer == null)
+			{
 				_buttonPause.image.color = _colorUnpaused;
 				return;
 			}
@@ -61,29 +67,29 @@ namespace VavilichevGD.Utils.Timing.Example {
 			textField.text = text;
 		}
 
-		private void UpdateTimerTypeField() {
+		private void UpdateTimerTypeField()
+		{
 			_textType.text = $"Type: {_timerType.ToString()}";
 		}
 
-
-
-		#region CALLBACKS
-
-		private void OnStartButtonClick() {
-			if (_timer == null) {
+		private void OnStartButtonClick()
+		{
+			if (_timer == null)
+			{
 				_timer = new SyncedTimer(_timerType);
 				SubscribeOnTimerEvents();
 			}
-			
+
 			UpdateTimerTypeField();
 			_timer.Start(_remainingSeconds);
 			UpdatePauseButtonState();
 		}
 
-		private void OnPauseButtonClick() {
+		private void OnPauseButtonClick()
+		{
 			if (_timer == null)
 				return;
-			
+
 			if (_timer.isPaused)
 				_timer.Unpause();
 			else
@@ -92,22 +98,23 @@ namespace VavilichevGD.Utils.Timing.Example {
 			UpdatePauseButtonState();
 		}
 
-		private void OnStopButtonClick() {
+		private void OnStopButtonClick()
+		{
 			if (_timer == null)
 				return;
-			
+
 			_timer.Stop();
 			UpdatePauseButtonState();
 		}
 
-		private void OnTimerFinished() {
+		private void TimerFinished()
+		{
 			_textValue.text = "Value: Finished (0)";
 		}
 
-		private void OnTimerValueChanged(float remainingSeconds) {
+		private void TimerValueChanged(float remainingSeconds, TimeChangingSource timeChangingSource)
+		{
 			_textValue.text = $"Value: {remainingSeconds.ToString()}";
 		}
-
-		#endregion
 	}
 }

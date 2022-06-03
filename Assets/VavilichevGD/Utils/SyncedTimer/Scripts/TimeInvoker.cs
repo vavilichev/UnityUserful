@@ -1,48 +1,60 @@
 ﻿using System;
 using UnityEngine;
 
-namespace VavilichevGD.Utils.Timing {
-	public class TimeInvoker : MonoBehaviour {
-
-		#region EVENTS
-
+namespace VavilichevGD.Utils.Timing
+{
+	public class TimeInvoker : MonoBehaviour
+	{
 		public event Action<float> OnUpdateTimeTickedEvent;
-		public event Action<float> OnUpdateTimeUnscaledTickedEvent; 
+		public event Action<float> OnUpdateTimeUnscaledTickedEvent;
 		public event Action OnOneSyncedSecondTickedEvent;
 		public event Action OnOneSyncedSecondUnscaledTickedEvent;
 
-		#endregion
-
-		public static TimeInvoker instance {
-			get {
-				if (_instance == null) {
+		public static TimeInvoker instance
+		{
+			get
+			{
+				if (_instance == null)
+				{
 					var go = new GameObject("[TIME INVOKER]");
 					_instance = go.AddComponent<TimeInvoker>();
 					DontDestroyOnLoad(go);
 				}
+
 				return _instance;
 			}
 		}
+
 		private static TimeInvoker _instance;
-		
+
 		private float _oneSecTimer;
 		private float _oneSecUnscaledTimer;
-		
-		private void Update() {
+
+		private void Update()
+		{
 			var deltaTimer = Time.deltaTime;
-			OnUpdateTimeTickedEvent?.Invoke(deltaTimer);
 			
+			OnUpdateTimeTickedEvent?.Invoke(deltaTimer);
+
 			_oneSecTimer += deltaTimer;
-			if (_oneSecTimer >= 1f) {
+			
+			if (_oneSecTimer >= 1f)
+			{
 				_oneSecTimer -= 1f;
+				
 				OnOneSyncedSecondTickedEvent?.Invoke();
 			}
 
 			var unscaledDeltaTimer = Time.unscaledDeltaTime;
+			
 			OnUpdateTimeUnscaledTickedEvent?.Invoke(Time.unscaledDeltaTime);
+			
 			_oneSecUnscaledTimer += unscaledDeltaTimer;
-			if (_oneSecUnscaledTimer >= 1f) {
+			
+			if (_oneSecUnscaledTimer >= 1f)
+			{
 				_oneSecUnscaledTimer -= 1f;
+				
 				OnOneSyncedSecondUnscaledTickedEvent?.Invoke();
 			}
 		}
